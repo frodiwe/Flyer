@@ -1,6 +1,6 @@
 ## Interface: 100002
 ## Title: Flyer
-## Author: Frodo Baggins
+## Author: Frodiwe
 ## Version: 1.0
 
 main.lua
