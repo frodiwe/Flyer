@@ -1,36 +1,30 @@
-local frame = CreateFrame("Frame")
-local isMountedInitially = IsMounted()
-local initialZoom = GetCameraZoom()
-
 local MAX_CAMERA_ZOOM = 50;
+local MIN_CAMERA_ZOOM = 15;
 
+local frame = CreateFrame("Frame")
+local isMountedBefore = IsMounted()
+local unmountedZoom = MIN_CAMERA_ZOOM
+local mountedZoom = MAX_CAMERA_ZOOM
+
+frame:RegisterEvent("PLAYER_MOUNT_DISPLAY_CHANGED")
 frame:SetScript("OnEvent", function(self, event, ...)
-    if event ~= "COMPANION_UPDATE" then
-        return
-    end
-
-    local companionType = ...
-
-    if companionType ~= "MOUNT" then
+    if event ~= "PLAYER_MOUNT_DISPLAY_CHANGED" then
         return
     end
     
-    C_Timer.NewTicker(0.1, function ()
-        local isMountedNow = IsMounted()
+    local isMountedNow = IsMounted()
 
-        if isMountedNow == isMountedInitially then
-            return
-        end
+    if isMountedNow == isMountedBefore then
+        return
+    end
 
-        if isMountedNow then
-            initialZoom = GetCameraZoom()
-            CameraZoomOut(MAX_CAMERA_ZOOM)
-        else
-            CameraZoomIn(GetCameraZoom() - initialZoom)
-        end
+    if isMountedNow then
+        unmountedZoom = GetCameraZoom()
+        CameraZoomOut(mountedZoom - unmountedZoom)
+    else
+        mountedZoom = GetCameraZoom()
+        CameraZoomIn(mountedZoom - unmountedZoom)
+    end
 
-        isMountedInitially = isMountedNow
-    end, 5)
+    isMountedBefore = isMountedNow
 end)
-
-frame:RegisterEvent("COMPANION_UPDATE")
