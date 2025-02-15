@@ -1,7 +1,7 @@
-## Interface: 100206
+## Interface: 110007
 ## Title: Flyer
-## Author: Frodiwe
-## SavedVariables: mountedZoom, unmountedZoom, enabledInInstances
+## Author: frodiwe
 ## Version: 1.1
+## SavedVariables: unmountedZoom, mountedZoom, enabledInInstances, isDebugOn
 
 main.lua
