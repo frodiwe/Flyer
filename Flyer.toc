@@ -1,6 +1,6 @@
 ## Interface: 110007
 ## Title: Flyer
-## Author: frodiwe
+## Author: Frodiwe
 ## Version: 1.1
 ## SavedVariables: unmountedZoom, mountedZoom, enabledInInstances, isDebugOn
 
